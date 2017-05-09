@@ -1,0 +1,86 @@
+---
+spring:
+  application:
+    name: @project.artifactId@
+  data:
+    mongodb:
+      uri: mongodb://mongo:27017/example
+
+server:
+  port: 8080
+  context-path: /
+  ssl:
+    enabled: false
+
+info:
+  artifactId: @project.artifactId@
+  description: @project.description@
+  version: @project.version@
+
+management:
+  context-path: /status
+  security:
+    enabled: false
+
+vertx:
+  prefix: soe-example
+
+hazelcast:
+  group:
+    name: Blubber
+    password: password
+  cluster:
+    members: localhost
+
+---
+spring:
+  profiles: producerA
+
+vertx:
+  host:
+    name: producerA
+
+hazelcast:
+  cluster:
+    members: producerA, producerB
+
+---
+spring:
+  profiles: producerB
+
+vertx:
+  host:
+    name: producerB
+
+hazelcast:
+  cluster:
+    members: producerA, producerB
+
+---
+spring:
+  profiles: localA
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/example
+
+server:
+  port: 8083
+
+hazelcast:
+  cluster:
+    members: localhost
+
+---
+spring:
+  profiles: localB
+  data:
+    mongodb:
+     uri: mongodb://localhost:27017/example
+
+server:
+  port: 8084
+
+hazelcast:
+  cluster:
+    members: localhost
+

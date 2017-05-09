@@ -1,0 +1,46 @@
+version: '2.1'
+services:
+  producerA:
+    image: producer
+    hostname: producerA
+    depends_on:
+      mongo:
+        condition: service_healthy
+    links:
+      - mongo
+    environment:
+      - SPRING_PROFILES_ACTIVE=producerA
+    ports:
+      - "8083:8080"
+      - "5003:5005"
+    healthcheck:
+     test: wget -qO- "http://producerA:8080/status/check" | grep -q '{"status":"UP","hazelcast"'
+     interval: 1s
+     timeout: 1s
+     retries: 180
+  producerB:
+    image: producer
+    hostname: producerB
+    depends_on:
+      mongo:
+       condition: service_healthy
+    links:
+     - mongo
+    environment:
+     - SPRING_PROFILES_ACTIVE=producerB
+    ports:
+      - "8084:8080"
+      - "5004:5005"
+    healthcheck:
+      test: wget -qO- "http://producerB:8080/status/check" | grep -q '{"status":"UP","hazelcast"'
+      interval: 1s
+      timeout: 1s
+      retries: 180
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.0.0.0/24
+        ip_range: 10.0.0.0/24

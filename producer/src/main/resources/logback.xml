@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<property name="projectName" value="producer"/>
+
+	<property name="mdc_log_pattern" value="%d{YYYY-MM-dd HH:mm:ss.SSS} %5level %logger{0}:%line [%t] [%mdc] - %msg%n"/>
+
+	<appender name="LOCAL-CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} %5level %logger{0}:%line [%t] [%mdc] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/${projectName}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/archive/${projectName}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<maxHistory>3</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>50MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${mdc_log_pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="de.example" level="info"/>
+	<logger name="org.apache.catalina" level="info" additivity="false"/>
+
+	<root level="warn">
+		<appender-ref ref="LOCAL-CONSOLE"/>
+		<appender-ref ref="FILE"/>
+	</root>
+</configuration>

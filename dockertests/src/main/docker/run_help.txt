@@ -1,0 +1,11 @@
+run.sh <command> [args]
+    available commands:
+       start <appName>          - start all dependencies and app
+       startWithTests <appName> - start all dependencies and app, run integration tests
+       test                     - run tests against running env and app
+       stop                     - shutdown all containers
+
+       startEnv                 - start only env
+       stopEnv                  - shutdown only env
+
+       clean                    - DELETE ALL Container AND Images from docker, use carefully and do not complain :)
