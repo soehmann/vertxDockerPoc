@@ -66,6 +66,10 @@ spring:
 server:
   port: 8083
 
+vertx:
+  host:
+    name: localhost
+
 hazelcast:
   cluster:
     members: localhost
@@ -79,6 +83,10 @@ spring:
 
 server:
   port: 8084
+
+vertx:
+  host:
+    name: localhost
 
 hazelcast:
   cluster:

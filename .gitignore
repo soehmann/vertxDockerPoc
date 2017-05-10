@@ -1,0 +1,7 @@
+.idea/
+*.iml
+target/
+logs/*
+
+dockertests/src/main/docker/target/
+dockertests/src/main/docker/logs/
