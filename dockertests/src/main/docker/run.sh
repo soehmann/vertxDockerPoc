@@ -116,20 +116,6 @@ function assertThatAppIsAvailable {
 
 }
 
-function startEnv {
-
-	stopAllContainers
-
-    ${dcEnv} up -d --build
-
-}
-
-function stopEnv {
-
-    ${dcEnv} down
-
-}
-
 function clean {
 
 	stopAllContainers
@@ -166,12 +152,6 @@ case "${type}" in
         ;;
     "stop")
         stopAllContainers
-        ;;
-	"startEnv")
-        startEnv
-        ;;
-	"stopEnv")
-        stopEnv
         ;;
     "clean")
         clean

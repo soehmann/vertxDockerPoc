@@ -3,11 +3,6 @@ services:
   producerA:
     image: producer
     hostname: producerA
-    depends_on:
-      mongo:
-        condition: service_healthy
-    links:
-      - mongo
     environment:
       - SPRING_PROFILES_ACTIVE=producerA
     ports:
@@ -21,11 +16,6 @@ services:
   producerB:
     image: producer
     hostname: producerB
-    depends_on:
-      mongo:
-       condition: service_healthy
-    links:
-     - mongo
     environment:
      - SPRING_PROFILES_ACTIVE=producerB
     ports:
@@ -36,11 +26,3 @@ services:
       interval: 1s
       timeout: 1s
       retries: 180
-networks:
-  default:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-      - subnet: 10.0.0.0/24
-        ip_range: 10.0.0.0/24

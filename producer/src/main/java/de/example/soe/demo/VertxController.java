@@ -30,12 +30,12 @@ public class VertxController {
         log.info("Start to trigger event with siteId: {}", siteId);
 
         Single<Message<String>> messageSingle = vertx.eventBus()
-                .rxSend(SOE_EXAMPLE_KATALOG_EVENT, new KatalogIdentifier(siteId), new DeliveryOptions().setSendTimeout(5000L));
+                .rxSend(SOE_EXAMPLE_KATALOG_EVENT, new KatalogIdentifier(siteId), new DeliveryOptions().setSendTimeout(2000L));
 
         String responseString = messageSingle
                 .map(Message::body)
                 .onErrorReturn(t -> {
-                    log.error("Failed to send katalog event for siteId: {} and pathId: {} by error: {}", siteId, t.getMessage());
+                    log.error("Failed to send katalog event for siteId: {} by error: {}", siteId, t.getMessage());
                     log.error("Vertx send error.", t);
                     return null;
                 })

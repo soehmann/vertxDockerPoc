@@ -38,7 +38,7 @@ public class ConnectionIntegrationTest {
         final HttpEntity<String> entity = new HttpEntity<>(headers);
 
         for (int i = 0; i < 10; i++) {
-            ResponseEntity<String> response = this.restTemplate.exchange("http://producerA:8080/katalogevent/1", HttpMethod.GET, entity, String.class);
+            ResponseEntity<String> response = this.restTemplate.exchange("http://producerA:8080/katalogevent/"+i, HttpMethod.GET, entity, String.class);
 
             System.out.println("Response no: " + i + " status: " + response.getStatusCode() + " body: " + response.getBody());
             //assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);

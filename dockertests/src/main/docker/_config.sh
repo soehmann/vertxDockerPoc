@@ -18,7 +18,6 @@ export DOCKER_M2_REPOSITORY=${DOCKER_M2_HOME}/repository
 export DOCKER_USER_ID=$(id -u)
 export DOCKER_USER_GROUP_ID=$(id -g)
 
-export dcEnv="docker-compose -f docker-compose-env.yml"
-export dcApp="docker-compose -f docker-compose-env.yml -f docker-compose-producer.yml"
+export dcApp="docker-compose -f docker-compose-producer.yml"
 
 echo "--> finish loading configuration..."

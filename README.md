@@ -32,8 +32,7 @@ If the result of nc is "0" then is the port open. You'll see "1" for closed port
 
 ## Local run
 
-You can also run these POC on local machine and you'll see that all messages be send and no timeout occurs.  
-Start at first the mongo docker container by ```./run.sh startEnv``` from the dockertests directory. 
-And then go into producer directory and build the jars by: ```mvn clean install```. 
+You can also run these POC on local machine and you'll see that all messages be send and no timeout occurs.   
+Go into producer directory and build the jars by: ```mvn clean install```. 
 Start the application by: ```mvn spring-boot:run -Dspring.profiles.active=localA``` and ```mvn spring-boot:run -Dspring.profiles.active=localB```
 Switch back to the dockertests directory and now you can run the test ```mvn clean verify```, but before move the ignore flag from local test (ConnectionIntegrationTest#sucessfulConnection_ProducerToProducer_onLocal) to the other test method.

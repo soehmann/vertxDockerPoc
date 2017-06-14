@@ -2,10 +2,39 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                       http://maven.apache.org/xsd/settings-1.0.0.xsd">
-	<localRepository>${user.home}/.m2/repository</localRepository>
-	<interactiveMode>true</interactiveMode>
-	<usePluginRegistry>false</usePluginRegistry>
-	<offline>false</offline>
 
+    <localRepository>/home/sven.ehmann/.m2/repository</localRepository>
+
+    <profiles>
+        <profile>
+            <id>idealo-repo</id>
+            <repositories>
+                <repository>
+                    <id>idealo-repo</id>
+                    <url>https://repo.eu.idealo.com/artifactory/repo</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+ 
+    <activeProfiles>
+        <activeProfile>idealo-repo</activeProfile>
+    </activeProfiles>
+    
+    <mirrors>
+        <mirror>
+            <id>idealo-repo-master</id>
+            <name>Idealo Maven Repository - Master</name>
+            <url>https://repo.eu.idealo.com/artifactory/repo</url>
+            <mirrorOf>*</mirrorOf>
+        </mirror>
+    </mirrors>
+    
 </settings>
 
